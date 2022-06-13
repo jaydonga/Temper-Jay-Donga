@@ -1,5 +1,7 @@
 package com.temper.jaydonga.model
 
+import com.google.gson.annotations.SerializedName
+
 data class JobDataModel(
     val data : List<Data>,
     val aggregations : Aggregations,
@@ -47,11 +49,16 @@ data class Data (
 
 data class Earnings_per_hour (
     val currency : String,
-    val amount : Int
+    val amount : Double
 )
 
 data class Links (
     val get_directions : String
+)
+
+data class ImageLinks (
+    val hero_image : String,
+    val thumb_image : String,
 )
 
 data class Flexpools (
@@ -99,7 +106,7 @@ data class Client (
     val description : String,
     val allow_temper_trial : Boolean,
     val blocked_minutes_before_shift : String,
-    val links : Links,
+    val links : ImageLinks,
     val rating : Rating,
     val average_response_time : Double,
     val factoring_allowed : Boolean,
@@ -164,4 +171,9 @@ data class Geo (
 data class Name_translation (
     val en_GB : String,
     val nl_NL : String
+)
+
+val currencyMap = mapOf(
+    "EUR" to "€",
+    "USD" to "$",
 )

@@ -1,0 +1,98 @@
+package com.temper.jaydonga.view.ui
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Card
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextAlign.Companion
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.temper.jaydonga.R
+import com.temper.jaydonga.model.Data
+import com.temper.jaydonga.model.DummyData
+import com.temper.jaydonga.model.currencyMap
+import com.temper.jaydonga.view.ui.theme.TemperJayDongaTheme
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
+@Composable
+fun JobCard(
+    data: Data,
+) {
+    Card {
+        Column {
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(data.job.project.client.links.hero_image)
+                    .crossfade(true)
+                    .build(),
+                placeholder = painterResource(R.drawable.placeholder),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .padding(top = 10.dp),
+                contentDescription = "Job image placeholder",
+            )
+            Row {
+                Text(
+                    text = data.job.category.name,
+                    modifier = Modifier.padding(start = 10.dp, top = 10.dp),
+                    textAlign = TextAlign.Start,
+                    fontSize = 16.sp
+                )
+                Text(
+                    text = "${currencyMap[data.average_estimated_earnings_per_hour.currency]}" +
+                            "${data.average_estimated_earnings_per_hour.amount}",
+                    modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 10.dp),
+                    textAlign = Companion.End,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+            Text(
+                text = data.job.project.client.registration_name,
+                modifier = Modifier.padding(start = 10.dp, top = 10.dp),
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = "${formattedTime(data.earliest_possible_start_time)} - ${formattedTime(data.latest_possible_end_time)}",
+                modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp),
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp,
+            )
+        }
+    }
+}
+
+val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH)
+val outputFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+
+private fun formattedTime(time: String): String {
+    return outputFormat.format(inputFormat.parse(time) ?: Date())
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    TemperJayDongaTheme {
+        JobCard(data = DummyData.getJobsData().data[0])
+    }
+}
