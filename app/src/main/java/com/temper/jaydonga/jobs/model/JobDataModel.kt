@@ -1,6 +1,4 @@
-package com.temper.jaydonga.model
-
-import com.google.gson.annotations.SerializedName
+package com.temper.jaydonga.jobs.model
 
 data class JobDataModel(
     val data : List<Data>,

@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.JobsListActivity"
+            android:name="com.temper.jaydonga.jobs.view.JobsListActivity"
             android:exported="true"
             android:theme="@style/Theme.TemperJayDonga">
             <intent-filter>

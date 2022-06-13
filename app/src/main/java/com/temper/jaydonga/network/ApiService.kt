@@ -1,6 +1,6 @@
 package com.temper.jaydonga.network
 
-import com.temper.jaydonga.model.JobDataModel
+import com.temper.jaydonga.jobs.model.JobDataModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,11 +1,10 @@
-package com.temper.jaydonga.view.ui
+package com.temper.jaydonga.jobs.view.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,10 +21,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.temper.jaydonga.R
-import com.temper.jaydonga.model.Data
-import com.temper.jaydonga.model.DummyData
-import com.temper.jaydonga.model.currencyMap
-import com.temper.jaydonga.view.ui.theme.TemperJayDongaTheme
+import com.temper.jaydonga.jobs.model.Data
+import com.temper.jaydonga.jobs.model.DummyData
+import com.temper.jaydonga.jobs.model.currencyMap
+import com.temper.jaydonga.jobs.view.ui.theme.TemperJayDongaTheme
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

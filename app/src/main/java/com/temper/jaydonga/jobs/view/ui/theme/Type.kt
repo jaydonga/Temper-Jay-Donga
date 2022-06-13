@@ -1,4 +1,4 @@
-package com.temper.jaydonga.view.ui.theme
+package com.temper.jaydonga.jobs.view.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

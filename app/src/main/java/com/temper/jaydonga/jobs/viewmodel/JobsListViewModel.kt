@@ -1,7 +1,7 @@
-package com.temper.jaydonga.viewmodel
+package com.temper.jaydonga.jobs.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.temper.jaydonga.model.JobListRepository
+import com.temper.jaydonga.jobs.model.JobListRepository
 import com.temper.jaydonga.network.ResultWrapper.GenericError
 import com.temper.jaydonga.network.ResultWrapper.NetworkError
 import com.temper.jaydonga.network.ResultWrapper.Success

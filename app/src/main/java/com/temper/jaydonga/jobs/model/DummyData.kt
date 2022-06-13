@@ -1,4 +1,4 @@
-package com.temper.jaydonga.model
+package com.temper.jaydonga.jobs.model
 
 import com.google.gson.Gson
 
