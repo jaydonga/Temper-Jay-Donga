@@ -28,10 +28,14 @@ class JobsListViewModel(private val jobListRepository: JobListRepository): ViewM
                     jobListFlow.emit(jobsResponse.value)
                 }
                 is GenericError -> {
-                    apiErrorFlow.emit(jobsResponse.error.orEmpty())
+                    if (jobsResponse.error?.isNotEmpty() == true) {
+                        apiErrorFlow.emit(jobsResponse.error)
+                    }
                 }
                 is NetworkError -> {
-                    apiErrorFlow.emit(jobsResponse.error)
+                    if (jobsResponse.error.isNotEmpty()) {
+                        apiErrorFlow.emit(jobsResponse.error)
+                    }
                 }
             }
         }

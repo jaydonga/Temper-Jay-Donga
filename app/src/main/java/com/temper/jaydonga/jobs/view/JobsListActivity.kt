@@ -14,6 +14,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
+import com.temper.jaydonga.R
 import com.temper.jaydonga.common.showToast
 import com.temper.jaydonga.jobs.view.ui.BottomNavigationButtons
 import com.temper.jaydonga.jobs.view.ui.JobCard
@@ -27,18 +28,16 @@ class JobsListActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel.fetchJobsList()
+
         setContent {
             TemperJayDongaTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-
-                    viewModel.fetchJobsList()
-
                     val jobList = viewModel.jobListFlow.collectAsState().value
                     lifecycleScope.launchWhenCreated {
                         viewModel.apiErrorFlow.collect { errorMessage ->
-                            if (errorMessage.isNotEmpty()) {
-                                showToast(errorMessage)
-                            }
+                            if (errorMessage.isNotEmpty()) showToast(errorMessage)
                         }
                     }
 

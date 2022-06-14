@@ -1,6 +1,8 @@
 package com.temper.jaydonga.jobs.view.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +16,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -38,46 +41,58 @@ import java.util.Locale
 fun JobCard(
     data: Data,
 ) {
-    Card {
+    Card(elevation = 5.dp) {
         Column {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(data.job.project.client.links.hero_image)
-                    .crossfade(true)
-                    .build(),
-                placeholder = painterResource(R.drawable.placeholder),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .padding(top = 10.dp),
-                contentDescription = "Job image placeholder",
-            )
+            Box(modifier = Modifier.fillMaxSize()) {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(data.job.project.client.links.hero_image)
+                        .crossfade(true)
+                        .build(),
+                    placeholder = painterResource(R.drawable.placeholder),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .padding(top = 10.dp),
+                    contentDescription = "Job image placeholder",
+                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp),
+                    horizontalAlignment = Alignment.End,
+                    verticalArrangement = Arrangement.Bottom,
+                ) {
+                    Text(
+                        text = "${currencyMap[data.average_estimated_earnings_per_hour.currency]} ${data.average_estimated_earnings_per_hour.amount}",
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .background(color = Color.White),
+                        textAlign = Companion.End,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+            }
             Row {
                 Text(
                     text = data.job.category.name,
                     modifier = Modifier.padding(start = 10.dp, top = 10.dp),
                     textAlign = TextAlign.Start,
-                    fontSize = 16.sp
-                )
-                Text(
-                    text = "${currencyMap[data.average_estimated_earnings_per_hour.currency]} ${data.average_estimated_earnings_per_hour.amount}",
-                    modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 10.dp),
-                    textAlign = Companion.End,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
                 )
             }
             Text(
                 text = data.job.project.client.registration_name,
-                modifier = Modifier.padding(start = 10.dp, top = 10.dp),
+                modifier = Modifier.padding(start = 10.dp, top = 5.dp),
                 textAlign = TextAlign.Start,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
             )
             Text(
                 text = "${formattedTime(data.earliest_possible_start_time)} - ${formattedTime(data.latest_possible_end_time)}",
-                modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp),
+                modifier = Modifier.padding(start = 10.dp, top = 5.dp, bottom = 10.dp),
                 textAlign = TextAlign.Start,
                 fontSize = 18.sp,
             )
