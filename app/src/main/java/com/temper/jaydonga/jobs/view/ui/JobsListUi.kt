@@ -1,13 +1,18 @@
 package com.temper.jaydonga.jobs.view.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -56,8 +61,7 @@ fun JobCard(
                     fontSize = 16.sp
                 )
                 Text(
-                    text = "${currencyMap[data.average_estimated_earnings_per_hour.currency]}" +
-                            "${data.average_estimated_earnings_per_hour.amount}",
+                    text = "${currencyMap[data.average_estimated_earnings_per_hour.currency]} ${data.average_estimated_earnings_per_hour.amount}",
                     modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 10.dp),
                     textAlign = Companion.End,
                     fontSize = 18.sp,
@@ -93,5 +97,37 @@ private fun formattedTime(time: String): String {
 fun DefaultPreview() {
     TemperJayDongaTheme {
         JobCard(data = DummyData.getJobsData().data[0])
+    }
+}
+
+@Composable
+fun BottomNavigationButtons(clickHandler: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 30.dp),
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+        Button(
+            onClick = {
+                clickHandler()
+            },
+            modifier = Modifier
+                .width(150.dp)
+                .width(50.dp)
+        ) {
+            Text(text = "Sign up")
+        }
+        Button(
+            onClick = {
+                clickHandler()
+            },
+            modifier = Modifier
+                .width(150.dp)
+                .width(50.dp)
+        ) {
+            Text(text = "Log in")
+        }
     }
 }
