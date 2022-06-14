@@ -2,7 +2,6 @@ package com.temper.jaydonga.jobs.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -14,13 +13,15 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
-import com.temper.jaydonga.R
 import com.temper.jaydonga.common.showToast
+import com.temper.jaydonga.jobs.model.Data
+import com.temper.jaydonga.jobs.model.JobLocation
 import com.temper.jaydonga.jobs.view.ui.BottomNavigationButtons
 import com.temper.jaydonga.jobs.view.ui.JobCard
 import com.temper.jaydonga.jobs.view.ui.theme.TemperJayDongaTheme
 import com.temper.jaydonga.jobs.viewmodel.JobsListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.ArrayList
 
 class JobsListActivity : ComponentActivity() {
 
@@ -49,12 +50,27 @@ class JobsListActivity : ComponentActivity() {
                         }
                         BottomNavigationButtons(
                             clickHandler = {
-                                startActivity(Intent(applicationContext, BlankActivity::class.java))
+                                startActivity(Intent(applicationContext, MapsActivity::class.java).apply {
+                                    putParcelableArrayListExtra(
+                                        MapsActivity.KEY_LOCATIONS,
+                                        ArrayList(createListOfLocations(jobList))
+                                    )
+                                })
                             },
                         )
                     }
                 }
             }
+        }
+    }
+
+    private fun createListOfLocations(jobList: List<Data>): List<JobLocation> {
+        return jobList.map {
+            JobLocation(
+                it.job.report_at_address.geo.lat,
+                it.job.report_at_address.geo.lon,
+                it.job.title
+            )
         }
     }
 }

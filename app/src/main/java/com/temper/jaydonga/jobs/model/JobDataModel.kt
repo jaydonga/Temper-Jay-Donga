@@ -1,5 +1,8 @@
 package com.temper.jaydonga.jobs.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class JobDataModel(
     val data: List<Data>,
     val aggregations: Aggregations,
@@ -204,3 +207,10 @@ val currencyMap = mapOf(
     "EUR" to "€",
     "USD" to "$",
 )
+
+@Parcelize
+data class JobLocation(
+    val latitude: Double,
+    val longitude: Double,
+    val name: String
+) : Parcelable

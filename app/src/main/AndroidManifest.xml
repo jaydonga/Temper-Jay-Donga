@@ -4,6 +4,7 @@
     package="com.temper.jaydonga">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".common.TemperApplication"
@@ -17,8 +18,18 @@
         android:theme="@style/Theme.TemperJayDonga"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBM-fpood5WiU734jPiHldvICQp3Ahccik" />
+
         <activity
-            android:name="com.temper.jaydonga.jobs.view.JobsListActivity"
+            android:name=".jobs.view.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".jobs.view.JobsListActivity"
             android:exported="true"
             android:theme="@style/Theme.TemperJayDonga">
             <intent-filter>
