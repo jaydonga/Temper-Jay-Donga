@@ -4,5 +4,5 @@ import com.temper.jaydonga.network.ResultWrapper
 
 interface JobListRepository {
 
-    fun getJobs(date: String): ResultWrapper<List<Data>>
+    suspend fun getJobs(date: String): ResultWrapper<List<Data>>
 }
